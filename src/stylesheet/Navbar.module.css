@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* Global Styles (if any, keep them minimal) */
+/* This file should only contain styles for Navbar, not global resets */
+
+/* Navbar Main Container */
+.navbarParent {
+  background-color: white !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 30px;
+}
+
+/* Navbar Logo */
+.navbarBrand {
+  padding: 0px 30px;
+}
+
+/* Navigation Links Container */
+.navbarNav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style: none; /* remove bullet points */
+}
+
+/* Navigation Items */
+.navItem {
+  padding: 0px 15px;
+}
+
+/* Navigation Link Text */
+.navLink {
+  text-decoration: none;
+  color: black;
+  position: relative; /* For the animated underline */
+  transition: color 0.3s ease;
+}
+
+/* Animated Underline Effect */
+.navLink::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -5px; /* Adjust this value for space below the text */
+  left: 0;
+  background-color: #007bff; /* Underline color */
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.navLink:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Profile Dropdown Styles */
+.profileDropdown {
+  position: relative;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: white;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+.profileHeader:hover {
+  background: #f5f5f5;
+}
+
+.lianaProfileImage {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profileName {
+  font-weight: 600;
+  font-size: 15px;
+  color: #222;
+  width: 100%;
+  margin-left: 8px; /* Added spacing */
+}
+
+.dropdownIcon {
+  color: #333;
+  transition: transform 0.3s ease;
+}
+
+.dropdownIcon.rotate {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu */
+.profileDropdownMenu {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 8px 0;
+  width: 170px;
+  z-index: 10;
+  display: block; /* Ensure it's visible when active */
+}
+
+.profileDropdownMenu li {
+  padding: 10px 16px;
+}
+
+.profileDropdownMenu li:hover {
+  background: #f3f3f3;
+}
+
+.dropdownItem {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  width: 100%;
+}

@@ -1,0 +1,98 @@
+.footertopcontainer{
+    
+    background-color: #252641;
+    margin-top: 70px;
+    padding: 50px 0px;
+}
+.footerheadingandcontent{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: row;
+     gap: 50px;
+     color: white;
+     flex-wrap: wrap;
+}
+.footerheadingandcontent h2{
+    color: white;
+}
+.footerimage{
+    color: white !important;
+}
+.vertical-line {
+  width: 2px;           
+  height: 100px;  
+  background-color: white; 
+  margin: 10px ;
+  opacity: 0.5;
+}
+.headingtwooffooter{
+    color: white !important;
+}
+
+/* subscribe div styling  */
+
+.subscribeheading{
+    text-align: center;
+    opacity: 0.6;
+    color: white !important;
+    font-size: 20px;
+    font-weight:normal;
+    margin-top: 50px;
+}
+
+.footeremail{
+    padding: 15px;
+    width: 24%;
+    height: 50px;
+    border: 1px solid white;
+    border-radius: 25px;
+    background-color: #252641;
+}
+.subscribebtn{
+    background-color: #49BBBD;
+    width: 10%;
+    height: 50px;
+    border:none;
+    border-radius: 30px;
+}
+
+.formofooter{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin-top: 30px;
+ gap: 20px;
+}
+
+/* careers privacy policy  */
+.careersprivacypolicy{
+    display: flex;
+    justify-content: center;
+    padding: 0px 370px;
+    align-items: center;
+    margin-top: 80px;
+}
+.careersprivacypolicy p{
+    color: white;
+    opacity: 0.6;
+    text-align: center;
+}
+.vertical-line2 {
+  width: 2px;           
+  height: 30px;  
+  background-color: white; 
+  margin: 10px ;
+  opacity: 0.5;
+}
+
+/* copyright div styling  */
+
+.copyright{
+    text-align: center;
+    opacity: 0.5;
+    color: white !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}

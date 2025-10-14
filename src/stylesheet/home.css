@@ -1,0 +1,507 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+/* landing page styling  */
+.asideimageandcontent {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 50px;
+  background-color: #49bbbdff;
+  margin-top: -8px;
+  height: 479px;
+}
+.landingasideimage img {
+  width: 100%;
+  object-fit: cover;
+  height: 400px;
+}
+.landingasideimage {
+  position: relative;
+  top: 0%;
+  right: 10%;
+}
+.boxes {
+  position: absolute;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 30%);
+  color: black !important;
+  height: 120px;
+  padding: 10px 20px;
+  border-radius: 20px;
+}
+
+.boxone {
+  top: 5%;
+  right: 90%;
+  z-index: 5;
+}
+.boxtwo {
+  top: 37%;
+  left: 68%;
+  z-index: 3;
+}
+.boxthree {
+  top: 70%;
+  right: 90%;
+  z-index: 3;
+}
+.iconscontent {
+  background-color: #23bdee;
+  color: white;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border-radius: 10px;
+}
+.iconscontent1 {
+  background-color: #f88c3d;
+  color: white;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border-radius: 10px;
+}
+.iconscontent2 {
+  padding: 10px;
+  border-radius: 50px;
+}
+.content {
+  display: inline-flex;
+  font-size: 1.2rem;
+  align-items: center;
+  gap: 10px;
+}
+.content p {
+  color: black;
+  opacity: 0.7;
+  width: 100%;
+}
+.belowertext {
+  color: black;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  opacity: 0.7;
+}
+.joinnowclassbtn {
+  background-color: #d8587e;
+  border: none;
+  padding: 8px 30px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: black;
+}
+.joinnowclassbtn:hover {
+  transform: scaleX(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* design of studying  */
+.texteddiv h3,
+p {
+  width: 50%;
+  word-spacing: 2px;
+}
+.texteddiv h3 {
+  font-size: 2.5rem;
+  font-weight: bolder;
+}
+.texteddiv p {
+  opacity: 0.8;
+  font-weight: bold;
+}
+.studying {
+  font-size: 2.5rem;
+  font-weight: bolder;
+  color: #f48c06;
+  padding-right: 10px;
+}
+.joinandeatchnow {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin-top: 50px;
+}
+.joinandeatchnow .joinforfreebtn {
+  padding: 10px 30px;
+  border-radius: 30px;
+  border: none;
+  background-color: #ffffff4d;
+  color: white;
+  text-decoration: none;
+}
+.joinforfreebtn:hover {
+  transform: translateY(10px);
+  transition: transform 0.3s ease-in-out;
+}
+.joinandeatchnow .watchhowitworks {
+  padding: 10px 30px;
+  border: none;
+  background-color: #49bbbdff;
+  color: white;
+  font-size: 1rem;
+  text-decoration: none;
+}
+.watchhowitworks:hover {
+  transform: translateY(10px);
+  transition: transform 0.3s ease-in-out;
+}
+.playvideo {
+  font-size: 3rem;
+}
+
+/* our success story  */
+.oursuccess {
+  margin-top: 100px;
+}
+.oursuccess,
+h3,
+h5 {
+  color: black;
+  text-align: center;
+}
+/* progressive cards styling  */
+.progreecard1 {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 70px;
+}
+.progresscardsheading {
+  font-size: 3.5rem;
+  background: linear-gradient(#49bbbd, #136cb5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.progresscards,
+h2,
+h5 {
+  color: black !important;
+}
+.progresscards,
+h5 {
+  padding: 0px 30px;
+  margin-left: 30px;
+  opacity: 0.7;
+  font-size: 16px;
+}
+
+/* all in one cloud software section styling  */
+.cloudsoftwaresection {
+  margin-top: 100px;
+}
+.cloudsoftwaresection h5 {
+  color: black;
+  text-align: center;
+  width: 65%;
+  margin-left: auto;
+  margin-top: 30px;
+  opacity: 0.6;
+  margin-right: auto;
+}
+.allinonesoftwareheading {
+  font-size: 3.5rem;
+  background: linear-gradient(to right, #2f327d, #00cbb8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+/* cardsofsoftware about their characteristics  */
+.cardsofsoftwarecloud {
+  padding-top: 50px;
+}
+.cardsoftwarecloudone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px ;
+  /* background-color: rgb(38, 45, 118,8%); */
+  background-color: rgba(255, 255, 255, 100%);
+  box-shadow: 0px 10px 10px #dfdbdb;
+  position: relative;
+  border-radius: 20px;
+}
+
+.cardsoftwarecloudone h3 {
+  color: black;
+}
+.cardsoftwarecloudone h6 {
+  color: black;
+  width: 80%;
+  padding: 10px 15px;
+  text-align: center;
+}
+
+/* calendare file and pepole icons styling  */
+.fileicons {
+  background-color: #5b72ee;
+  color: white;
+  width: 80px;
+  height: 80px;
+  /* font-size: 3rem; */
+  border-radius: 50px;
+  padding: 15px;
+  position: absolute;
+  top: -20%;
+  left: 40%;
+}
+.calendaricons {
+  background-color: #00CBB8;
+  color: white;
+  width: 80px;
+  height: 80px;
+  /* font-size: 3rem; */
+  border-radius: 50px;
+  padding: 15px;
+    position: absolute;
+  top: -20%;
+  left: 40%;
+}
+.peoplesicons {
+  background-color: #29B9E7;
+  color: white;
+  width: 80px;
+  height: 80px;
+  /* font-size: 3rem; */
+  border-radius: 50px;
+  padding: 15px;
+    position: absolute;
+  top: -20%;
+  left: 40%;
+}
+/* waht is totc scetion styling  */
+
+.whatistotc{
+  margin-top: 200px;
+}
+.TOTCname{
+  color: #00CBB8;
+}
+.whatistotc h2{
+  color: black;
+  text-align: center;
+  font-size: 3.5rem;
+}
+.whatistotc h6{
+  color: black;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 30px;
+  opacity: 0.7;
+}
+.whatistotcforstuandteach{
+  display: flex;
+  margin-top: 50px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  position: relative;
+}
+.studentcontent{
+  position: absolute;
+  top: 45%;
+  right: 15%;
+}
+.teachercontent{
+  position: absolute;
+  top: 45%;
+  left: 15%;
+}
+.teacherimagestyling{
+  width: 100%;
+  height: 350px;
+  border-radius: 10px;
+  filter: grayscale(60%);
+}
+.teacherimagestyling:hover{
+  transform:translateY(10px);
+  transition: transform 0.6s ease-in-out;
+  cursor: pointer;
+}
+.studentimagestyling{
+  width: 100%;
+  height: 350px;
+  border-radius: 10px;
+  filter: grayscale(60%);
+}
+.studentimagestyling:hover{
+  transform:translateY(10px);
+  transition: transform 0.6s ease-in-out;
+  cursor: pointer;
+}
+
+/* section for styling of what you can do physically in totc  */
+.whatcanwedophysically{
+  margin-top: 150px;
+}
+
+.everytingyoucandosection h2{
+  color: #2F327D;
+  width: 90%;
+}
+.everytingyoucandosection h6{
+  color: black;
+  opacity: 0.6;
+  width:70%;
+  line-height: 1.8;
+  padding-top: 15px;
+}
+.everytingyoucandosection a{
+  color: black;
+  opacity: 0.6;
+}
+.TOTCvideo{
+  width: 100%;
+  height: 320px;
+}
+
+/* quizes and assesmnet section styling  */
+.quizesandassesmentparent{
+  margin-top: 150px;
+}
+.assesmenycontainer{
+  margin-top: 50px !important;
+}
+.assesmenycontainer h6{
+  color: black;
+  margin-top: 20px;
+  opacity: 0.6;
+  width: 78%;
+}
+.assesmentimage{
+  width: 90%;
+  height: 450px
+}
+
+/* styling for latest news and section  */
+.sectionfornewsandlatest{
+  margin-top: 100px;
+}
+.sectionfornewsandlatest h2{
+  text-align: center;
+  font-size: 2.5rem;
+  color: #2F327D;
+}
+.sectionfornewsandlatest p{
+  opacity: 0.6;
+  color: black;
+}
+.headingparaoflatestnews{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.containerofnewssideleft{
+  padding-top: 30px;
+}
+.containerofnewssideleft button{
+  padding: 10px 30px;
+  background-color: #49BBBD;
+  border: none;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+.containerofnewssideleft h3{
+  color: black;
+  font-size: 1.2rem;
+  width: 90%;
+  margin-top: 20px;
+  text-align: left;
+}
+.containerofnewssideleft p{
+  color: black;
+  opacity: 0.7;
+  margin-top: 10px;
+  width: 100%;
+}
+.readmore{
+  opacity: 0.6;
+  color: black;
+}
+
+/* .imageandcontent{
+  display: flex;
+  flex-direction: column;
+  padding-left: 120px;
+}
+.imageandcontent h3{
+  color: black;
+  text-align: left;
+  width: 100%;
+}
+.imageandcontent p{
+  text-align: left;
+  width: 90%;
+}
+.newsimage{
+  width: 50%;
+  height: 220px;
+}
+.newsimage1{
+  width: 50%;
+  height: 220px;
+  border-radius: 15px;
+} */
+.imageandcontent{
+  display: flex;
+  justify-items: flex-end; 
+  align-items: center;
+  gap: 20px; 
+  padding-left: 120px;
+  /* padding-top: 20px; */
+}
+.contentofimage{
+  padding: 20px 0px;
+}
+.contentofimage h3{
+  color: black;
+  text-align: left;
+  width: 100%;
+  font-size: 1.2rem;
+}
+.contentofimage h6{
+  color: black;
+  text-align: left;
+  width: 100%;
+
+}
+.imagesofnews{
+  padding-top: 20px;
+  object-fit: cover;
+  width: 40%;
+  height: 120px;
+}
+.imagesofnews1{
+  padding-top:20px ;
+  object-fit: cover;
+  width:100%;
+  height: 120px;
+}
+
+.showmorebtn {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.showmorebtn:hover {
+  color: #0056b3;
+}

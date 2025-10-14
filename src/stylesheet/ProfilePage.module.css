@@ -1,0 +1,244 @@
+.pageContainer {
+  background-color: #f8fafc;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+  flex: 1;
+}
+
+/* 🧍 Profile Card */
+.profileCard {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 30px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #49bbbd;
+  object-fit: cover;
+}
+
+.userName {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-top: 10px;
+  color: #2f327d;
+}
+
+.userRole {
+  color: #49bbbd;
+  font-size: 0.95rem;
+  margin-top: 5px;
+}
+
+.detailsSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.detailItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #555;
+}
+
+.detailIcon {
+  color: #49bbbd;
+}
+
+.actionButton {
+  margin-top: 10px;
+  padding: 10px 18px;
+  border: none;
+  background-color: #49bbbd;
+  color: white;
+  font-weight: 500;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.actionButton:hover {
+  background-color: #3aa3a7;
+}
+
+/* 📊 Stats Section */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.statsCard {
+  background: #fff;
+  padding: 25px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
+}
+
+.statsIcon {
+  margin-bottom: 10px;
+}
+
+.statsValue {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2f327d;
+}
+
+.progressBarContainer {
+  background-color: #e5e7eb;
+  border-radius: 10px;
+  height: 10px;
+  width: 100%;
+  margin: 8px 0;
+  overflow: hidden;
+}
+
+.progressBar {
+  background-color: #49bbbd;
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.statsText {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+/* 🎓 Enrolled Courses Section */
+.enrolledCourses {
+  margin-bottom: 50px;
+}
+
+.enrolledCourses h2 {
+  font-size: 1.6rem;
+  color: #2f327d;
+  margin-bottom: 20px;
+}
+
+.courseList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.courseCard {
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
+}
+
+.courseCard:hover {
+  transform: translateY(-5px);
+}
+
+.courseImage {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.courseInfo {
+  padding: 15px;
+}
+
+.courseInfo h3 {
+  color: #2f327d;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.courseInfo p {
+  color: #555;
+  font-size: 0.9rem;
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+
+.progressWrapper {
+  margin-bottom: 10px;
+}
+
+.startBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #49bbbd;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-decoration: none;
+}
+
+.startBtn:hover {
+  background-color: #3aa3a7;
+}
+
+/* 🚪 Logout */
+.logoutWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.logoutBtn {
+  background-color: #ff6b6b;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.logoutBtn:hover {
+  background-color: #e65757;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .profileCard {
+    padding: 20px;
+  }
+
+  .courseList {
+    grid-template-columns: 1fr;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}

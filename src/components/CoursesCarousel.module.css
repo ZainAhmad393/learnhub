@@ -1,0 +1,189 @@
+/* Main Carousel Section */
+.carouselContainer {
+  padding: 60px 0;
+  background-color: #f8f9fa; /* Light gray background */
+  font-family: 'Inter', sans-serif;
+}
+
+/* Heading */
+.exploreCoursesHeading {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+/* Carousel Wrapper */
+.carouselWrapper {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Carousel Scrollable Area */
+.carousel {
+  display: flex;
+  overflow-x: auto; /* Horizontal scrolling */
+  gap: 20px;
+  padding: 20px 0;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* For Firefox */
+}
+
+/* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Course Card */
+.courseCard {
+  flex-shrink: 0;
+  width: 280px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.courseCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Content */
+.cardContent {
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.carouselImage {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Card Text */
+.courseTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin: 15px 0 5px;
+
+}
+
+.courseDescription {
+  font-size: 0.9rem;
+  color: #718096;
+  margin-bottom: 15px;
+  text-align: center;
+  width: 100%;
+}
+
+/* Rating */
+.ratingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto; /* Pushes to the bottom */
+}
+
+.ratingValue {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-right: 8px;
+}
+
+.starsIcons {
+  color: #f6ad55; /* Gold color for stars */
+}
+
+.ratingStarIcon {
+  font-size: 1rem;
+  margin-right: 2px;
+}
+
+/* View Course Button */
+.exploreMoreBtn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.exploreMoreBtn:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
+}
+
+/* Navigation Arrows */
+.arrowBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  color: #555;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.arrowBtn:hover {
+  background-color: #007bff;
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+  border-color: #007bff;
+}
+
+.arrowBtn.left {
+  left: 20px;
+}
+
+.arrowBtn.right {
+  right: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .arrowBtn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .carouselContainer {
+    padding: 30px 0;
+  }
+
+  .exploreCoursesHeading {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .arrowBtn {
+    top: calc(50% + 25px); /* To position below the cards a bit */
+  }
+}

@@ -1,0 +1,148 @@
+ 
+.authContainer {
+display: flex;
+align-items: center;
+justify-content: center;
+min-height: 100vh;
+background-color: #f0f2f5;  
+padding: 20px;
+}
+
+.card {
+width: 100%;
+max-width: 440px;
+padding: 30px;
+background: white;
+border-radius: 16px;
+box-shadow: 0 10px 30px rgba(47, 50, 125, 0.1);
+border: 1px solid #e0e0e0;
+}
+
+.heading {
+font-size: 2rem;
+font-weight: 700;
+color: #2F327D;  
+text-align: center;
+margin-bottom: 8px;
+}
+
+.subtext {
+text-align: center;
+color: #546e7a;
+margin-bottom: 30px;
+font-size: 0.95rem;
+}
+
+/* Input Fields */
+.inputGroup {
+position: relative;
+margin-bottom: 20px;
+}
+
+.inputField {
+width: 100%;
+padding: 12px 12px 12px 40px; /* Space for icon /
+border: 1px solid #cfd8dc;
+border-radius: 25px; / Rounded corners for modern feel */
+transition: all 0.3s ease;
+font-size: 1rem;
+outline: none;
+}
+
+.inputField:focus {
+border-color: #49bbbd;
+box-shadow: 0 0 0 3px rgba(73, 187, 189, 0.2);
+}
+
+.inputIcon {
+position: absolute;
+left: 15px;
+top: 50%;
+transform: translateY(-50%);
+color: #90a4ae;
+}
+
+.toggleIcon {
+position: absolute;
+right: 15px;
+top: 50%;
+transform: translateY(-50%);
+cursor: pointer;
+color: #49bbbd;
+transition: color 0.2s;
+}
+
+.toggleIcon:hover {
+color: #3e9f9f;
+}
+
+/* Buttons */
+.submitBtn {
+width: 100%;
+padding: 12px;
+border: none;
+border-radius: 25px;
+background-color: #49bbbd;
+color: white;
+font-weight: 700;
+font-size: 1.05rem;
+cursor: pointer;
+box-shadow: 0 4px 15px rgba(73, 187, 189, 0.4);
+transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submitBtn:hover:not(:disabled) {
+background-color: #3e9f9f;
+transform: translateY(-1px);
+}
+
+.submitBtn:disabled {
+opacity: 0.6;
+cursor: not-allowed;
+}
+
+/* Messages and Links */
+.messageSuccess {
+padding: 10px;
+background-color: #e6ffed;
+color: #38a169;
+border-radius: 8px;
+text-align: center;
+font-size: 0.9rem;
+font-weight: 500;
+}
+
+.messageError {
+padding: 10px;
+background-color: #ffeaea;
+color: #e53e3e;
+border-radius: 8px;
+text-align: center;
+font-size: 0.9rem;
+font-weight: 500;
+}
+
+.backLink {
+color: #2F327D;
+font-weight: 600;
+transition: color 0.2s;
+display: inline-flex;
+align-items: center;
+gap: 5px;
+margin-top: 15px;
+text-decoration: none;
+}
+
+.backLink:hover {
+color: #49bbbd;
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+.card {
+padding: 20px;
+}
+.heading {
+font-size: 1.8rem;
+}
+}

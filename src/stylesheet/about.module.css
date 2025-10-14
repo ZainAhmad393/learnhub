@@ -1,0 +1,263 @@
+/* Base Styles */
+.pageContainer {
+font-family: 'Inter', sans-serif;
+background-color: #f8f9fa;
+min-height: 100vh;
+}
+
+/* General Layout Helpers */
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 20px;
+}
+
+.sectionHeader {
+text-align: center;
+margin-bottom: 50px;
+}
+
+.sectionTitle {
+font-size: 2.5rem;
+font-weight: 700;
+color: #2F327D;
+margin-bottom: 10px;
+}
+
+.sectionSubtitle {
+font-size: 1.1rem;
+color: #546e7a;
+max-width: 800px;
+margin: 0 auto;
+}
+
+/* --- 1. Hero/Mission Section --- */
+.heroSection {
+padding: 80px 0;
+background: linear-gradient(135deg, #e0f2f1, #ffffff);
+}
+
+.missionContent {
+display: flex;
+align-items: center;
+gap: 40px;
+}
+
+.missionText {
+flex: 1;
+text-align: left;
+}
+
+.missionText h1 {
+font-size: 3rem;
+font-weight: 800;
+color: #004d40;
+margin-bottom: 20px;
+}
+
+.missionText p {
+font-size: 1.1rem;
+line-height: 1.8;
+color: #546e7a;
+margin-bottom: 20px;
+width: 90%;
+}
+
+.missionImage {
+border-radius: 15px;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+width: 40%;
+height: 320px;
+}
+
+/* --- 2. Team Section --- */
+.teamSection {
+padding: 80px 0;
+}
+
+.teamGrid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 30px;
+margin-top: 40px;
+}
+
+.teamCard {
+background: white;
+padding: 20px;
+border-radius: 12px;
+text-align: center;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.teamCard:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.memberImage {
+width: 120px;
+height: 120px;
+border-radius: 50%;
+object-fit: cover;
+margin-bottom: 15px;
+border: 4px solid #4db6ac;
+}
+
+.memberName {
+font-size: 1.4rem;
+font-weight: 700;
+color: #2F327D;
+margin-bottom: 5px;
+}
+
+.memberRole {
+font-size: 0.9rem;
+color: #F48C06;
+margin-bottom: 10px;
+width: 100%;
+}
+
+.memberBio {
+font-size: 0.9rem;
+color: #78909c;
+min-height: 40px;
+width: 100%;
+}
+
+.socialIcons {
+margin-top: 15px;
+display: flex;
+justify-content: center;
+gap: 20px;
+}
+
+.socialIcons a {
+color: #4db6ac;
+transition: color 0.3s ease;
+}
+
+.socialIcons a:hover {
+color: #00796b;
+}
+
+/* --- 3. Milestones/Timeline Section --- */
+.milestonesSection {
+padding: 80px 0;
+background-color: #f0f2f5;
+}
+
+.milestoneContainer {
+display: flex;
+flex-direction: column;
+position: relative;
+}
+
+/* Timeline vertical line */
+.milestoneContainer::before {
+content: '';
+position: absolute;
+left: 50%;
+top: 0;
+bottom: 0;
+width: 4px;
+background-color: #cfd8dc;
+transform: translateX(-50%);
+}
+
+.milestoneItem {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 40px;
+position: relative;
+}
+
+.milestoneItem:nth-child(even) {
+flex-direction: row-reverse; /* Alternate sides */
+}
+
+/* Dot in the center */
+.milestoneItem::before {
+content: '';
+position: absolute;
+width: 20px;
+height: 20px;
+background-color: #49BBBD;
+border-radius: 50%;
+z-index: 10;
+left: 50%;
+transform: translateX(-50%);
+border: 4px solid #f0f2f5;
+}
+
+.milestoneCard {
+width: 45%;
+background: white;
+padding: 25px;
+border-radius: 10px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.milestoneItem:nth-child(odd) .milestoneCard {
+margin-right: 55%; /* Space for line and dot */
+}
+
+.milestoneItem:nth-child(even) .milestoneCard {
+margin-left: 55%;
+}
+
+.milestoneYear {
+font-size: 1.8rem;
+color: #F48C06;
+font-weight: 800;
+margin-bottom: 5px;
+}
+
+.milestoneTitle {
+font-size: 1.2rem;
+color: #2F327D;
+font-weight: 600;
+margin-bottom: 8px;
+}
+
+.milestoneDescription {
+font-size: 0.9rem;
+color: #546e7a;
+}
+
+@media (max-width: 768px) {
+.missionContent {
+flex-direction: column;
+text-align: center;
+}
+.missionImage {
+order: -1; 
+margin-bottom: 30px;
+}
+.missionText h1 {
+font-size: 2.5rem;
+}
+
+.milestoneContainer::before {
+    left: 20px; /* Move timeline line to the left */
+}
+
+.milestoneItem {
+    flex-direction: column !important;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.milestoneItem::before {
+    left: 20px;
+    transform: none;
+}
+
+.milestoneCard {
+    width: 100%;
+    margin-left: 40px !important; /* Push card over to the right of the line */
+    margin-right: 0 !important;
+}
+}

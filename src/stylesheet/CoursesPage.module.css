@@ -1,0 +1,431 @@
+/* Base Styles */
+.pageContainer {
+font-family: 'Inter', sans-serif;
+background-color: #f8f9fa;
+min-height: 100vh;
+}
+
+.heroSection {
+padding: 40px 20px;
+background-color: #e0f7fa; 
+text-align: center;
+}
+
+.mainHeading {
+font-size: 2.5rem;
+font-weight: 700;
+color: #004d40;
+margin-bottom: 20px;
+}
+
+.filterBar {
+display: flex;
+justify-content: center;
+gap: 10px;
+flex-wrap: wrap;
+margin-bottom: 30px;
+}
+
+.categoryButton {
+padding: 8px 18px;
+border: 1px solid #4db6ac;
+border-radius: 20px;
+background-color: transparent;
+color: #004d40;
+cursor: pointer;
+transition: all 0.3s ease;
+font-size: 0.9rem;
+}
+
+.categoryButton:hover, .categoryButton.active {
+background-color: #4db6ac;
+color: white;
+border-color: #4db6ac;
+}
+/* CoursesPage.module.css mein yeh styles add karen */
+
+/* Section Header to hold Title and Toggle Button */
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto 30px auto; /* Centering and bottom margin */
+}
+
+/* Toggle Button Styling */
+.toggleButton {
+    background: none;
+    border: none;
+    color: #00796b;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s ease;
+}
+
+.toggleButton:hover {
+    color: #004d40;
+}
+
+/* Loading and No Results Messages */
+.loadingMessage, .noResults {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #4db6ac;
+    padding: 30px 0;
+    grid-column: 1 / -1; /* Ensure message spans the whole grid */
+}
+
+/* Featured Course Listing Title adjustment */
+/* Taake title aur button ek line mein rahein */
+.sectionTitle {
+    margin-bottom: 0; 
+}
+/* --- Course Grid Section --- */
+.sectionTitle {
+font-size: 2rem;
+font-weight: 600;
+color: #1a202c;
+margin-bottom: 30px;
+text-align: left;
+}
+
+.courseGrid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 25px;
+padding: 0 20px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.courseCard {
+background: white;
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.courseCard:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.courseImage {
+width: 100%;
+height: 160px;
+object-fit: cover;
+display: block;
+}
+
+.cardContent {
+padding: 15px;
+}
+
+.courseTitle {
+font-size: 1.25rem;
+font-weight: 600;
+color: #263238;
+margin-bottom: 8px;
+}
+
+.courseDescription {
+font-size: 0.9rem;
+color: #546e7a;
+margin-bottom: 15px;
+min-height: 40px;
+}
+
+.courseMeta {
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 0.9rem;
+color: #78909c;
+}
+
+.enrollButton {
+background-color: #4db6ac;
+color: white;
+border: none;
+padding: 10px 15px;
+border-radius: 8px;
+width: 100%;
+margin-top: 15px;
+cursor: pointer;
+font-weight: 600;
+transition: background-color 0.3s ease;
+}
+
+.enrollButton:hover {
+background-color: #00796b;
+}
+
+/* --- Progress Tracker Section --- */
+.progressSection {
+padding: 60px 0;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.progressGrid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 25px;
+padding: 0 20px;
+}
+
+.progressCard {
+background: white;
+padding: 20px;
+border-radius: 12px;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.progressCard h4 {
+font-size: 1.1rem;
+color: #004d40;
+margin-bottom: 10px;
+}
+
+.progressBarContainer {
+width: 100%;
+height: 10px;
+background-color: #cfd8dc;
+border-radius: 5px;
+margin-bottom: 8px;
+overflow: hidden;
+}
+
+.progressBar {
+height: 100%;
+background-color: #4db6ac;
+transition: width 0.5s ease;
+}
+
+.progressText {
+font-size: 0.9rem;
+color: #546e7a;
+font-weight: 500;
+}
+
+/* --- Categories Section --- */
+.categoriesSection {
+padding: 40px 0;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.categoryGrid {
+display: flex;
+justify-content: space-around;
+gap: 20px;
+flex-wrap: wrap;
+padding: 0 20px;
+}
+
+.categoryTile {
+background: #ffffff;
+padding: 25px;
+border-radius: 12px;
+box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+text-align: center;
+width: 150px;
+cursor: pointer;
+transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.categoryTile:hover {
+background-color: #e0f2f1;
+transform: translateY(-3px);
+}
+
+.categoryTile svg {
+color: #00796b;
+margin-bottom: 10px;
+}
+
+.categoryTile p {
+font-weight: 600;
+color: #263238;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+.mainHeading {
+font-size: 2rem;
+}
+.sectionTitle {
+font-size: 1.75rem;
+text-align: center;
+padding: 0 20px;
+}
+.progressGrid {
+grid-template-columns: 1fr;
+}
+}
+/* CoursesPage.module.css mein yeh styles add karen */
+
+/* --- Learning Path Overlay Styles --- */
+.learningPathOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85); /* Dark semi-transparent background */
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.closePathBtn {
+    position: sticky;
+    top: 10px;
+    right: 10px;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    float: right;
+    margin-bottom: 20px;
+}
+
+/* --- MyLearningPath Component Styling --- */
+.learningPathContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+}
+
+.pathHeader {
+    margin-bottom: 20px;
+}
+
+.pathTitle {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2F327D;
+}
+
+/* Progress Styling */
+.progressContainer {
+    margin-bottom: 30px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+.progressBarWrapper {
+    height: 15px;
+    background-color: #cfd8dc;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progressBar {
+    height: 100%;
+    background-color: #38a8a4; /* Success color */
+    color: white;
+    text-align: center;
+    line-height: 15px;
+    font-size: 10px;
+    transition: width 0.5s ease;
+    font-weight: bold;
+}
+
+.completionBadge {
+    font-size: 0.9rem;
+    color: #00796b;
+    font-weight: 600;
+}
+
+/* Video Grid */
+.videoGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.videoCard {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.videoThumbnail {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.videoContent {
+    padding: 15px;
+}
+
+.videoTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #263238;
+    margin-bottom: 10px;
+    min-height: 40px;
+}
+
+.videoActions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.markDoneBtn {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btnSuccess {
+    background-color: #4db6ac;
+    color: white;
+    border: none;
+}
+
+.btnOutline {
+    background-color: transparent;
+    color: #4db6ac;
+    border: 1px solid #4db6ac;
+}
+
+.btnOutline:hover {
+    background-color: #4db6ac;
+    color: white;
+}
+
+.watchLink {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.learningPathLoading, .learningPathError {
+    text-align: center;
+    padding: 50px;
+    color: #ef4444;
+    font-weight: 600;
+}

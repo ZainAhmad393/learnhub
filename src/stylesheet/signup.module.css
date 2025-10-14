@@ -1,0 +1,118 @@
+/* Container and Layout */
+.loginContainer {
+  padding: 50px;
+}
+
+.loginContent {
+  padding: 20px;
+}
+
+/* Image */
+.loginsideImage {
+  width: 90%;
+  height: auto;
+  padding-top: 50px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Form */
+.loginFormParent {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  margin-top: 30px;
+}
+
+.formLabel {
+  color: black !important;
+  float: left;
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+/* Input Fields */
+.animatedInput {
+  width: 100%;
+  height: 50px;
+  border-radius: 25px;
+  border: 2px solid #ccc;
+  color: #333;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+  outline: none;
+}
+
+.animatedInput:focus {
+  border-color: #49bbbd;
+  box-shadow: 0 0 8px rgba(73, 187, 189, 0.6);
+  transform: scale(1.01);
+  background-color: #fff;
+}
+
+/* Optional gradient animation */
+.animatedInput:focus {
+  animation: glowPulse 1.5s infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 5px rgba(73, 187, 189, 0.3), 0 0 10px rgba(73, 187, 189, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(73, 187, 189, 0.8), 0 0 25px rgba(73, 187, 189, 0.5);
+  }
+}
+
+/* Password Wrapper */
+.passwordWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.passwordInputLogin {
+  padding-right: 50px; /* Space for the icon */
+}
+
+.toggleIcon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #49bbbd; /* visible turquoise shade */
+  z-index: 10;
+  font-size: 1.3rem;
+  padding: 5px;
+}
+
+.toggleIcon:hover {
+  color: #3da8aa;
+}
+
+/* Submit Button */
+.loginSubmitBtn {
+  background-color: #49bbbd;
+  width: 100%; /* Made 100% wide for responsiveness */
+  height: 45px;
+  border: none;
+  border-radius: 25px;
+  margin-top: 30px;
+  color: white;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.loginSubmitBtn:hover {
+  background-color: #3da8aa;
+  transform: scale(1.02);
+}
+
+/* Validation Error Text */
+.errorText {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin: 5px 0 10px 0;
+  padding-left: 10px;
+}

@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* --- General Styles --- */
+/* Note: You should have these in a global stylesheet or in your index.css */
+/* I'm including them here for completeness */
+.body * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+/* --- Hero Section --- */
+.containerMainOfBlog {
+  background-color: #9DCCFF;
+  padding: 50px;
+  height: auto;
+  min-height: 470px;
+}
+
+.contentOfHeroSectionOfBlogs {
+  padding: 0px;
+}
+
+.heroSubheading {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: #555;
+}
+
+.inspiration {
+  color: #49BBBD;
+  font-weight: 600;
+}
+
+.heroHeading {
+  color: #2F327D !important;
+  width: 100%;
+  font-size: 2.5rem;
+  margin-top: 10px;
+  line-height: 1.2;
+}
+
+.heroParagraph {
+  width: 90%;
+  padding-top: 10px;
+  opacity: 0.6;
+  line-height: 1.6;
+}
+
+.startBtnOfBlogHero {
+  background-color: #49BBBD;
+  width: auto;
+  min-width: 200px;
+  height: 60px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.startBtnOfBlogHero:hover {
+  transform: scale(1.02);
+  background-color: #3e9f9f;
+}
+
+.herosectionImageOfBlog {
+  object-fit: cover;
+  width: 100%;
+  height: 330px;
+  transform: translateY(20px);
+}
+
+/* --- Reading Blog List Section --- */
+.containerOfBlogCards {
+  margin-top: 90px;
+  padding: 0 20px;
+}
+
+.readingBlogList {
+  font-weight: bold;
+  text-align: center;
+  font-size: 2.2rem;
+  color: #2F327D;
+  margin-bottom: 40px;
+}
+
+.imagesAndTheirContentOfCourses {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  justify-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.courseCard {
+  width: 100%;
+  height: 220px;
+  background-color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.courseCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.imageChildOfBlog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.imageOfBlogschild {
+  filter: grayscale(70%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease;
+}
+
+.courseCard:hover .imageOfBlogschild {
+  filter: grayscale(0%);
+}
+
+.titleOfCourses {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  padding: 15px 10px;
+  text-align: center;
+  color: #2F327D !important;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  border: none;
+  z-index: 1;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* --- Courses Section (Marketing Articles) --- */
+.parentOfCourseDetailsInBlog {
+  padding: 40px;
+  background-color: #f8f9fa;
+  margin-top: 100px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.sectionHeader h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.seeAllBtn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.seeAllBtn:hover {
+  background-color: #0056b3;
+}
+
+.containerOfBuyingCoursesAndDetails {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  height: auto;
+  padding: 0px 0px;
+}
+
+.coursesDescriptionAndDetails {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.coursesDescriptionAndDetails:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.imgOfCoursesInBlog {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.descriptionContainer {
+  padding: 15px;
+}
+
+.nameAndDuration {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1px;
+}
+
+.courseName {
+  margin: 0;
+  font-weight: 500;
+}
+
+.courseDuration {
+  margin: 0;
+  font-weight: 500;
+}
+
+.clockIcons {
+  font-size: 1.3rem;
+  font-weight: bolder;
+  color: black;
+  opacity: 0.4;
+}
+
+.courseTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+  margin-top: 15px;
+}
+
+.courseDescription {
+  margin-top: 15px;
+  font-size: 1rem;
+  color: #777;
+  line-height: 1.5;
+  width: 100%;
+
+}
+
+.priceAndDiscountPrice {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.coursePrice {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #28a745;
+  margin-right: 10px;
+}
+
+.courseDiscountPrice {
+  font-size: 1rem;
+  color: #999;
+  text-decoration: line-through;
+}
+
+/* Responsiveness for small devices */
+@media (max-width: 768px) {
+  .heroHeading {
+    font-size: 2rem;
+  }
+  .heroParagraph {
+    width: 100%;
+  }
+  .imagesAndTheirContentOfCourses {
+    gap: 15px;
+  }
+}
