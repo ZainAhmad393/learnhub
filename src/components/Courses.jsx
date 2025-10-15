@@ -14,7 +14,6 @@ import axios from "axios";
 
 const INITIAL_DISPLAY_COUNT = 3;
 
-// Helper to extract Playlist ID
 const extractPlaylistId = (urlOrId) => {
   if (!urlOrId) return "";
   try {
@@ -25,175 +24,154 @@ const extractPlaylistId = (urlOrId) => {
   }
 };
 
-// Dummy data
-const ALL_COURSES_DATA = [
-  {
-    id: 1,
-    category: "Web Dev",
-    title: "Modern React & Redux",
-    instructor: "Anil Sidhu",
-    duration: "4 hrs",
-    rating: 4.7,
-    image: "https://placehold.co/300x160/38a8a4/ffffff?text=React+UI",
-    playlistUrl: "PL8p2I9GklV47BCAjiCtuV_liN9IwAl8pM",
-  },
-  {
-    id: 2,
-    category: "Data Science",
-    title: "Mastering Python for Data Science",
-    instructor: "Apna College",
-    duration: "20 hrs",
-    rating: 4.9,
-    image: "https://placehold.co/300x160/546e7a/ffffff?text=Python+Data",
-    playlistUrl: "PLGjplNEQ1it8-0CmoljS5yeV-GlKSUEt0",
-  },
-  {
-    id: 3,
-    category: "Web Dev",
-    title: "Full Stack Node.js & Express",
-    instructor: "Apna College",
-    duration: "18 hrs",
-    rating: 4.6,
-    image: "https://placehold.co/300x160/e0f7fa/000000?text=Node.js+Backend",
-    playlistUrl: "PL8p2I9GklV456iofeMKReMTvWLr7Ki9At",
-  },
-  {
-    id: 4,
-    category: "Web Dev",
-    title: "Advanced JavaScript",
-    instructor: "Apna College",
-    duration: "3 hrs",
-    rating: 4.8,
-    image: "https://placehold.co/300x160/546E7A/ffffff?text=JavaScript",
-    playlistUrl: "PLGjplNEQ1it_oTvuLRNqXfz_v_0pq6unW",
-  },
-  {
-    id: 5,
-    category: "Design",
-    title: "Advanced CSS & Tailwind",
-    instructor: "Yahu Baba",
-    duration: "2 hrs",
-    rating: 4.8,
-    image: "https://placehold.co/300x160/4db6ac/ffffff?text=CSS+Design",
-    playlistUrl: "PL0b6OzIxLPbzDsI5YXUa01QzxOWyqmrWw",
-  },
-  {
-    id: 6,
-    category: "Marketing",
-    title: " Mastering Digital Marketing",
-    instructor: "Free Learnig Point",
-    duration: "2 .5hrs",
-    rating: 4.5,
-    image: "https://placehold.co/300x160/00796B/ffffff?text=Digital%20Marketing",
-    playlistUrl: "PL9ERAJ-z6sHX21rKpdC48RHm1U2ZOZ2tb",
-  },
-];
-
 const categories = [
   { name: "Development", icon: FaLaptopCode, filter: "Web Dev" },
   { name: "Data Science", icon: FaChartLine, filter: "Data Science" },
   { name: "Design", icon: FaPaintBrush, filter: "Design" },
   { name: "Marketing", icon: FaPaintBrush, filter: "Marketing" },
-
 ];
 
 const CoursesPage = () => {
   const [activeFilter, setActiveFilter] = useState("All Categories");
-  const [featuredCoursesData, setFeaturedCoursesData] =
-    useState(ALL_COURSES_DATA);
-  const [isLoading, setIsLoading] = useState(false);
+  const [featuredCoursesData, setFeaturedCoursesData] = useState([]);
   const [enrolledCourses, setEnrolledCourses] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [showAllActive, setShowAllActive] = useState(false);
   const [showAllFeatured, setShowAllFeatured] = useState(false);
   const [showAllCategories, setShowAllCategories] = useState(false);
 
-  const handleProgressUpdate = (updatedCourse) => {
-    const updatedList = enrolledCourses.map((c) =>
-      c.id === updatedCourse.id ? updatedCourse : c
-    );
-    setEnrolledCourses(updatedList);
-    localStorage.setItem("enrolledCourses", JSON.stringify(updatedList));
-  };
-
-  const handleEnroll = (course) => {
-    const existingCourseIndex = enrolledCourses.findIndex(
-      (c) => c.id === course.id
-    );
-
-    if (existingCourseIndex !== -1) {
-      // ✅ Agar already enrolled hai, to update karo instead of skipping
-      const updatedCourses = [...enrolledCourses];
-      updatedCourses[existingCourseIndex] = {
-        ...updatedCourses[existingCourseIndex],
-        ...course,
-        playlistId: extractPlaylistId(course.playlistUrl), // updated playlist
-      };
-      setEnrolledCourses(updatedCourses);
-      localStorage.setItem("enrolledCourses", JSON.stringify(updatedCourses));
-
-      alert(`Updated ${course.title} with latest playlist!`);
-      setSelectedCourse(updatedCourses[existingCourseIndex]);
-      return;
-    }
-
-    // ✅ Else, new enrollment
-    const newEnrollment = {
-      ...course,
-      progress: 0,
-      playlistId: extractPlaylistId(course.playlistUrl),
-    };
-
-    const updatedCourses = [...enrolledCourses, newEnrollment];
-    setEnrolledCourses(updatedCourses);
-    localStorage.setItem("enrolledCourses", JSON.stringify(updatedCourses));
-
-    alert(`You have successfully enrolled in ${course.title}!`);
-    setSelectedCourse(newEnrollment);
-  };
-
-  const handleStartLearning = (course) => {
-    setSelectedCourse(course);
-  };
-
+  // ✅ DEBUGGING: Fetch courses from backend
   const fetchCourses = async (filter) => {
     setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    try {
+      console.log("🔄 Fetching courses from backend...");
+      const res = await axios.get("http://localhost:5000/api/courses");
+      console.log("📦 Backend courses response:", res.data);
+      
+      let courses = Array.isArray(res.data) ? res.data : [];
+      console.log(`📚 Total courses received: ${courses.length}`);
 
-    const filteredData =
-      filter === "All Categories"
-        ? ALL_COURSES_DATA
-        : ALL_COURSES_DATA.filter((course) => course.category === filter);
-
-    setFeaturedCoursesData(filteredData);
+      if (filter !== "All Categories") {
+        courses = courses.filter((course) => course.category === filter);
+        console.log(`🎯 Filtered courses for ${filter}: ${courses.length}`);
+      }
+      
+      setFeaturedCoursesData(courses);
+    } catch (error) {
+      console.error("❌ Failed to fetch courses:", error);
+      console.error("Error details:", error.response?.data);
+      setFeaturedCoursesData([]);
+    }
     setIsLoading(false);
   };
 
-  useEffect(() => {
-    fetchCourses(activeFilter);
-    const savedCourses = JSON.parse(localStorage.getItem("enrolledCourses"));
-    if (savedCourses) {
-      setEnrolledCourses(savedCourses);
+  // ✅ DEBUGGING: Fetch enrolled courses
+  const fetchEnrolledCourses = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (!user) {
+        console.log("👤 No user logged in");
+        setEnrolledCourses([]);
+        return;
+      }
+
+      console.log("🔄 Fetching enrollments for user:", user._id);
+      const res = await axios.get(`http://localhost:5000/api/enrollments/${user._id}`);
+      console.log("📦 Enrollments response:", res.data);
+      
+      setEnrolledCourses(Array.isArray(res.data) ? res.data : []);
+    } catch (error) {
+      console.error("❌ Failed to fetch enrolled courses:", error);
+      console.error("Error details:", error.response?.data);
+      setEnrolledCourses([]);
     }
+  };
+
+  // ✅ Enroll function
+  const handleEnroll = async (course) => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (!user) {
+        alert("Please login to enroll in courses");
+        return;
+      }
+
+      console.log("🎯 Enrolling in course:", course.title);
+      const res = await axios.post("http://localhost:5000/api/enrollments/enroll", {
+        userId: user._id,
+        courseId: course._id,
+      });
+
+      console.log("✅ Enrollment successful:", res.data);
+      fetchEnrolledCourses(); // Refresh enrolled courses
+      alert(`You have successfully enrolled in ${course.title}!`);
+    } catch (error) {
+      console.error("❌ Enroll failed:", error);
+      alert(error.response?.data?.message || "Failed to enroll. Try again.");
+    }
+  };
+
+  const handleStartLearning = (course) => {
+    const courseWithPlaylist = {
+      ...course,
+      playlistId: extractPlaylistId(course.playlistUrl)
+    };
+    setSelectedCourse(courseWithPlaylist);
+  };
+
+  useEffect(() => {
+    console.log("🚀 CoursesPage mounted");
+    fetchCourses(activeFilter);
+    fetchEnrolledCourses();
   }, [activeFilter]);
+
+  // Display logic
+  const featuredCoursesToDisplay = showAllFeatured
+    ? featuredCoursesData
+    : featuredCoursesData.slice(0, INITIAL_DISPLAY_COUNT);
 
   const activeCoursesToDisplay = showAllActive
     ? enrolledCourses
     : enrolledCourses.slice(0, INITIAL_DISPLAY_COUNT);
 
-  const featuredCoursesToDisplay = showAllFeatured
-    ? featuredCoursesData
-    : featuredCoursesData.slice(0, INITIAL_DISPLAY_COUNT);
-
   const categoriesToDisplay = showAllCategories
     ? categories
     : categories.slice(0, INITIAL_DISPLAY_COUNT);
 
-  const isFeaturedSectionExpandable =
-    featuredCoursesData.length > INITIAL_DISPLAY_COUNT;
+  const isFeaturedSectionExpandable = featuredCoursesData.length > INITIAL_DISPLAY_COUNT;
   const isCategorySectionExpandable = categories.length > INITIAL_DISPLAY_COUNT;
-  const isActiveSectionExpandable =
-    enrolledCourses.length > INITIAL_DISPLAY_COUNT;
+  const isActiveSectionExpandable = enrolledCourses.length > INITIAL_DISPLAY_COUNT;
+
+  // ✅ Helper to get course display data
+  const getCourseDisplayData = (course) => {
+    return {
+      id: course._id || course.id,
+      title: course.title,
+      image: course.image,
+      progress: course.progress || 0,
+      instructor: course.instructor,
+      duration: course.duration,
+      playlistUrl: course.playlistUrl,
+      rating: course.rating
+    };
+  };
+
+  // ✅ Helper to get enrollment display data
+  const getEnrollmentDisplayData = (enrollment) => {
+    const course = enrollment.courseId || enrollment;
+    return {
+      id: enrollment._id || course._id,
+      title: course.title,
+      image: course.image,
+      progress: enrollment.progress || 0,
+      instructor: course.instructor,
+      duration: course.duration,
+      playlistUrl: course.playlistUrl,
+      rating: course.rating,
+      _id: course._id
+    };
+  };
 
   return (
     <div className={styles.pageContainer}>
@@ -210,7 +188,7 @@ const CoursesPage = () => {
           <MyLearningPath
             playlistId={selectedCourse.playlistId}
             course={selectedCourse}
-            onProgressUpdate={handleProgressUpdate}
+            onProgressUpdate={fetchEnrolledCourses}
           />
         </div>
       )}
@@ -219,26 +197,23 @@ const CoursesPage = () => {
       <section className={styles.heroSection}>
         <h1 className={styles.mainHeading}>Find Your Next Skill Upgrade</h1>
         <div className={styles.filterBar}>
-          {[
-            "All Categories",
-            "Web Dev",
-            "Data Science",
-            "Design",
-            "Marketing",
-          ].map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveFilter(cat)}
-              className={`${styles.categoryButton} ${
-                activeFilter === cat ? styles.active : ""
-              }`}
-              disabled={isLoading}
-            >
-              {cat}
-            </button>
-          ))}
+          {["All Categories", "Web Dev", "Data Science", "Design", "Marketing"].map(
+            (cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveFilter(cat)}
+                className={`${styles.categoryButton} ${
+                  activeFilter === cat ? styles.active : ""
+                }`}
+                disabled={isLoading}
+              >
+                {cat}
+              </button>
+            )
+          )}
         </div>
       </section>
+
       {/* Courses Section */}
       <section className={styles.progressSection}>
         <div className={styles.sectionHeader}>
@@ -254,8 +229,7 @@ const CoursesPage = () => {
                 </>
               ) : (
                 <>
-                  <FaChevronDown size={16} /> Show All (
-                  {featuredCoursesData.length})
+                  <FaChevronDown size={16} /> Show All ({featuredCoursesData.length})
                 </>
               )}
             </button>
@@ -263,31 +237,29 @@ const CoursesPage = () => {
         </div>
 
         {isLoading ? (
-          <p className={styles.loadingMessage}>
-            Loading courses... Please wait.
-          </p>
+          <p className={styles.loadingMessage}>Loading courses... Please wait.</p>
         ) : (
           <div className={styles.courseGrid}>
-            {featuredCoursesToDisplay.length > 0 ? (
-              featuredCoursesToDisplay.map((course) => (
-                <div key={course.id} className={styles.courseCard}>
+            {featuredCoursesToDisplay.map((course) => {
+              const courseData = getCourseDisplayData(course);
+              return (
+                <div key={courseData.id} className={styles.courseCard}>
                   <img
-                    src={course.image}
-                    alt={course.title}
+                    src={courseData.image}
+                    alt={courseData.title}
                     className={styles.courseImage}
                     onError={(e) =>
-                      (e.target.src =
-                        "https://placehold.co/300x160/cccccc/000000?text=Course+Image")
+                      (e.target.src = "https://placehold.co/300x160/cccccc/000000?text=Course+Image")
                     }
                   />
                   <div className={styles.cardContent}>
-                    <h3 className={styles.courseTitle}>{course.title}</h3>
+                    <h3 className={styles.courseTitle}>{courseData.title}</h3>
                     <p className={styles.courseDescription}>
-                      Taught by {course.instructor} | {course.duration}
+                      Taught by {courseData.instructor} | {courseData.duration}
                     </p>
                     <div className={styles.courseMeta}>
-                      <span>⭐ {course.rating} Rating</span>
-                      <span>{course.duration}</span>
+                      <span>⭐ {courseData.rating} Rating</span>
+                      <span>{courseData.duration}</span>
                     </div>
                     <button
                       className={styles.enrollButton}
@@ -297,8 +269,9 @@ const CoursesPage = () => {
                     </button>
                   </div>
                 </div>
-              ))
-            ) : (
+              );
+            })}
+            {featuredCoursesToDisplay.length === 0 && !isLoading && (
               <p className={styles.noResults}>
                 No courses found in this category.
               </p>
@@ -306,6 +279,7 @@ const CoursesPage = () => {
           </div>
         )}
       </section>
+
       {/* My Enrolled Courses */}
       <section className={styles.progressSection}>
         <div className={styles.sectionHeader}>
@@ -321,8 +295,7 @@ const CoursesPage = () => {
                 </>
               ) : (
                 <>
-                  <FaChevronDown size={16} /> Show All ({enrolledCourses.length}
-                  )
+                  <FaChevronDown size={16} /> Show All ({enrolledCourses.length})
                 </>
               )}
             </button>
@@ -330,50 +303,52 @@ const CoursesPage = () => {
         </div>
 
         <div className={styles.courseGrid}>
-          {activeCoursesToDisplay.length > 0 ? (
-            activeCoursesToDisplay.map((course) => (
-              <div key={course.id} className={styles.courseCard}>
+          {activeCoursesToDisplay.map((enrollment) => {
+            const courseData = getEnrollmentDisplayData(enrollment);
+            return (
+              <div key={courseData.id} className={styles.courseCard}>
                 <img
-                  src={course.image}
-                  alt={course.title}
+                  src={courseData.image}
+                  alt={courseData.title}
                   className={styles.courseImage}
                   onError={(e) =>
-                    (e.target.src =
-                      "https://placehold.co/300x160/cccccc/000000?text=Course+Image")
+                    (e.target.src = "https://placehold.co/300x160/cccccc/000000?text=Course+Image")
                   }
                 />
                 <div className={styles.cardContent}>
-                  <h3 className={styles.courseTitle}>{course.title}</h3>
+                  <h3 className={courseData.title}>{courseData.title}</h3>
                   <p className={styles.courseDescription}>
-                    Progress: {course.progress}%
+                    Progress: {courseData.progress}%
                   </p>
                   <div className={styles.progressBarContainer}>
                     <div
                       className={styles.progressBar}
-                      style={{ width: `${course.progress}%` }}
+                      style={{ width: `${courseData.progress}%` }}
                     ></div>
                   </div>
                   <button
                     className={styles.enrollButton}
-                    onClick={() => handleStartLearning(course)}
+                    onClick={() => handleStartLearning(courseData)}
                   >
-                    {course.progress === 100
+                    {courseData.progress === 100
                       ? "Completed! Review"
                       : "Resume Learning"}
                   </button>
-                  {course.progress === 100 && (
+                  {courseData.progress === 100 && (
                     <p className={styles.completionBadge}>🎉 COURSE COMPLETE</p>
                   )}
                 </div>
               </div>
-            ))
-          ) : (
+            );
+          })}
+          {activeCoursesToDisplay.length === 0 && (
             <p className={styles.noResults}>
-              You are not enrolled in any courses. Enroll below to start!
+              You are not enrolled in any courses. Enroll above to start!
             </p>
           )}
         </div>
       </section>
+
       {/* Categories Section */}
       <section className={styles.categoriesSection}>
         <div className={styles.sectionHeader}>

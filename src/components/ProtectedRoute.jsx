@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {
-    alert("⚠️ Please login first to access this page.");
+    alert("Please log in to access this section.");
     return <Navigate to="/login" replace />;
   }
 
