@@ -1,7 +1,7 @@
 const config = {
-  // Development aur Production dono handle ho
-  API_BASE_URL: process.env.REACT_APP_API_BASE_URL || "http://localhost:5000/api",
-  BACKEND_URL: process.env.REACT_APP_BACKEND_URL || "http://localhost:5000",
+  // Production backend URL use karo
+  API_BASE_URL: process.env.REACT_APP_API_BASE_URL || "https://learnhubbackend-5wnv.onrender.com/api",
+  BACKEND_URL: process.env.REACT_APP_BACKEND_URL || "https://learnhubbackend-5wnv.onrender.com",
 };
 
 export default config;

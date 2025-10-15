@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import config from '../config';
+import config from "../config";
 import { useAuth } from "../context/AuthContext";
 
 const API_KEY = "AIzaSyCpzIPK4GPMH5G3XnV9yz2UWydcn6THgRs";
@@ -15,8 +15,9 @@ const MyLearningPath = ({ playlistId, course, onProgressUpdate }) => {
   const [errorMsg, setErrorMsg] = useState("");
   const [currentVideo, setCurrentVideo] = useState(null);
   const [showCompletion, setShowCompletion] = useState(false);
-  
-const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
+
+  const BACKEND_URL = config.API_BASE_URL;
+
   // ✅ Fetch YouTube Playlist
   useEffect(() => {
     const fetchVideos = async () => {
@@ -45,7 +46,7 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
             title: item.snippet.title,
             thumbnail: item.snippet.thumbnails.medium.url,
             position: index + 1,
-            duration: "10:00"
+            duration: "10:00",
           }));
           setVideos(videoList);
         } else {
@@ -70,51 +71,57 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
       }
 
       try {
-        const res = await axios.get(`${BACKEND_URL}/${user._id}/${course._id}`);
+        const res = await axios.get(
+          `${BACKEND_URL}/enrollments/${user._id}/${course._id}`
+        );
         const data = res.data;
-        
+
         setCompletedVideos(data.completedVideos || []);
         setProgress(data.progress || 0);
         setLastWatched(data.lastWatchedVideo || "");
 
-        // Check if course is completed
         if (data.progress === 100) {
           setShowCompletion(true);
         }
-        
+
         console.log("✅ Progress loaded from backend:", data.progress + "%");
         console.log("📹 Completed videos:", data.completedVideos || []);
       } catch (err) {
         console.error("Error fetching progress:", err);
+        setCompletedVideos([]);
+        setProgress(0);
       }
     };
     fetchProgress();
   }, [user, course]);
 
-  // ✅ FIXED: Enhanced progress update - ALWAYS notify parent
+  // ✅ FIXED: Enhanced progress update
   const updateProgress = async (videoId, markAsCompleted = false) => {
     if (!user?._id || !course?._id || videos.length === 0) return;
 
     let updatedCompleted = [...completedVideos];
-    
+
     if (markAsCompleted) {
       if (!updatedCompleted.includes(videoId)) {
         updatedCompleted.push(videoId);
         console.log("✅ Marking video as completed:", videoId);
       }
     } else {
-      updatedCompleted = updatedCompleted.filter(id => id !== videoId);
+      updatedCompleted = updatedCompleted.filter((id) => id !== videoId);
       console.log("❌ Marking video as incomplete:", videoId);
     }
 
-    const newProgress = Math.round((updatedCompleted.length / videos.length) * 100);
-    
+    const newProgress = Math.round(
+      (updatedCompleted.length / videos.length) * 100
+    );
+
     setCompletedVideos(updatedCompleted);
     setProgress(newProgress);
     setLastWatched(videoId);
 
     try {
-      const response = await axios.put(`${BACKEND_URL}/progress`, {
+      // ✅ CRITICAL FIX: Added "/enrollments" in URL
+      const response = await axios.put(`${BACKEND_URL}/enrollments/progress`, {
         userId: user._id,
         courseId: course._id,
         progress: newProgress,
@@ -125,13 +132,11 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
       console.log("📈 Progress updated in backend:", newProgress + "%");
       console.log("📦 Backend response:", response.data);
 
-      // ✅ CRITICAL FIX: ALWAYS notify parent component
       if (onProgressUpdate) {
         console.log("🔄 Notifying parent component about progress update");
         onProgressUpdate();
       }
 
-      // Check if course completed
       if (newProgress === 100) {
         setShowCompletion(true);
         console.log("🎉 Course completed! Showing congratulations modal");
@@ -142,19 +147,19 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
     }
   };
 
-  // ✅ FIXED: Mark video as completed - with proper notification
+  // ✅ Mark video as completed
   const markVideoCompleted = (videoId) => {
     console.log("🎯 Marking video completed:", videoId);
     updateProgress(videoId, true);
   };
 
-  // ✅ FIXED: Mark video as incomplete - with proper notification
+  // ✅ Mark video as incomplete
   const markVideoIncomplete = (videoId) => {
     console.log("🎯 Marking video incomplete:", videoId);
     updateProgress(videoId, false);
   };
 
-  // ✅ FIXED: Watch video and update progress
+  // ✅ Watch video and update progress
   const watchVideo = (videoId) => {
     console.log("▶️ Watching video:", videoId);
     setCurrentVideo(videoId);
@@ -169,40 +174,42 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
 
   // ✅ Get next video to watch
   const getNextVideo = () => {
-    const firstIncomplete = videos.find(video => !completedVideos.includes(video.id));
+    const firstIncomplete = videos.find(
+      (video) => !completedVideos.includes(video.id)
+    );
     return firstIncomplete || videos[0];
   };
 
-  // ✅ FIXED: Reset course progress - with proper notification
+  // ✅ FIXED: Reset course progress
   const resetProgress = async () => {
     try {
       console.log("🔄 Resetting course progress");
-      await axios.put(`${BACKEND_URL}/progress`, {
+      // ✅ CRITICAL FIX: Added "/enrollments" in URL
+      await axios.put(`${BACKEND_URL}/enrollments/progress`, {
         userId: user._id,
         courseId: course._id,
         progress: 0,
         completedVideos: [],
         lastWatchedVideo: "",
       });
-      
+
       setCompletedVideos([]);
       setProgress(0);
       setLastWatched("");
       setShowCompletion(false);
-      
-      // ✅ CRITICAL: Notify parent after reset
+
       if (onProgressUpdate) {
         console.log("🔄 Notifying parent after progress reset");
         onProgressUpdate();
       }
-      
+
       console.log("✅ Progress reset successfully");
     } catch (err) {
       console.error("❌ Reset progress error:", err);
     }
   };
 
-  // ✅ NEW: Get video status with clear indicators
+  // ✅ Get video status with clear indicators
   const getVideoStatus = (videoId) => {
     const isCompleted = completedVideos.includes(videoId);
     return {
@@ -211,7 +218,7 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
       statusColor: isCompleted ? "success" : "secondary",
       statusIcon: isCompleted ? "fa-check-circle" : "fa-circle",
       buttonText: isCompleted ? "Mark Incomplete" : "Mark Complete",
-      badgeClass: isCompleted ? "bg-success" : "bg-secondary"
+      badgeClass: isCompleted ? "bg-success" : "bg-secondary",
     };
   };
 
@@ -230,14 +237,17 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
     <div className="container py-4">
       {/* Course Completion Modal */}
       {showCompletion && (
-        <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+        <div
+          className="modal show d-block"
+          style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+        >
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content border-0 shadow-lg">
               <div className="modal-header border-0 bg-success text-white">
                 <h5 className="modal-title">🎉 Congratulations!</h5>
-                <button 
-                  type="button" 
-                  className="btn-close btn-close-white" 
+                <button
+                  type="button"
+                  className="btn-close btn-close-white"
                   onClick={() => setShowCompletion(false)}
                 ></button>
               </div>
@@ -245,9 +255,12 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
                 <div className="mb-3">
                   <i className="fas fa-trophy fa-4x text-warning"></i>
                 </div>
-                <h4 className="text-success mb-3">Course Completed Successfully!</h4>
+                <h4 className="text-success mb-3">
+                  Course Completed Successfully!
+                </h4>
                 <p className="text-muted">
-                  You have completed <strong>{course.title}</strong> with {progress}% progress.
+                  You have completed <strong>{course.title}</strong> with{" "}
+                  {progress}% progress.
                 </p>
                 <div className="row text-center mt-4">
                   <div className="col-md-4">
@@ -258,7 +271,9 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
                   </div>
                   <div className="col-md-4">
                     <div className="border rounded p-3">
-                      <h6 className="text-primary">{calculateTimeSpent()} min</h6>
+                      <h6 className="text-primary">
+                        {calculateTimeSpent()} min
+                      </h6>
                       <small>Time Spent</small>
                     </div>
                   </div>
@@ -271,13 +286,13 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
                 </div>
               </div>
               <div className="modal-footer border-0">
-                <button 
-                  className="btn btn-secondary" 
+                <button
+                  className="btn btn-secondary"
                   onClick={() => setShowCompletion(false)}
                 >
                   Close
                 </button>
-                <button 
+                <button
                   className="btn btn-primary"
                   onClick={() => {
                     setShowCompletion(false);
@@ -308,7 +323,7 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
               <small className="text-muted d-block">Overall Progress</small>
               <strong className="text-primary">{progress}%</strong>
             </div>
-            <button 
+            <button
               className="btn btn-outline-secondary btn-sm"
               onClick={resetProgress}
               title="Reset Progress"
@@ -334,7 +349,9 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
         <div className="col-md-3">
           <div className="card border-0 bg-light">
             <div className="card-body text-center py-3">
-              <h5 className="text-primary mb-1">{completedVideos.length}/{videos.length}</h5>
+              <h5 className="text-primary mb-1">
+                {completedVideos.length}/{videos.length}
+              </h5>
               <small className="text-muted">Videos Completed</small>
             </div>
           </div>
@@ -350,7 +367,9 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
         <div className="col-md-3">
           <div className="card border-0 bg-light">
             <div className="card-body text-center py-3">
-              <h5 className="text-info mb-1">{videos.length - completedVideos.length}</h5>
+              <h5 className="text-info mb-1">
+                {videos.length - completedVideos.length}
+              </h5>
               <small className="text-muted">Videos Remaining</small>
             </div>
           </div>
@@ -381,7 +400,9 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
             <div className="d-flex align-items-center justify-content-center">
               <i className="fas fa-play-circle text-warning me-2"></i>
               <div>
-                <div className="fw-bold">{videos.length - completedVideos.length}</div>
+                <div className="fw-bold">
+                  {videos.length - completedVideos.length}
+                </div>
                 <small className="text-muted">Remaining</small>
               </div>
             </div>
@@ -405,8 +426,8 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
             <strong>⏩ Continue Learning</strong>
             <p className="mb-0 small">Pick up where you left off</p>
           </div>
-          <button 
-            onClick={() => watchVideo(lastWatched)} 
+          <button
+            onClick={() => watchVideo(lastWatched)}
             className="btn btn-primary btn-sm"
           >
             Continue Watching ▶
@@ -417,7 +438,7 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
       {/* Next Video Suggestion */}
       {progress < 100 && (
         <div className="alert alert-warning mb-4">
-          <strong>📚 Suggested Next:</strong> 
+          <strong>📚 Suggested Next:</strong>
           <span className="ms-2">
             {getNextVideo()?.title || "Start with the first video"}
           </span>
@@ -434,24 +455,30 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
 
           return (
             <div key={video.id} className="col-lg-6">
-              <div className={`card h-100 shadow-sm border-0 ${
-                isLastWatched ? 'border-warning border-2' : 
-                isCurrentlyPlaying ? 'border-primary border-2' : 
-                isCompleted ? 'border-success' : 'border-light'
-              }`}>
+              <div
+                className={`card h-100 shadow-sm border-0 ${
+                  isLastWatched
+                    ? "border-warning border-2"
+                    : isCurrentlyPlaying
+                    ? "border-primary border-2"
+                    : isCompleted
+                    ? "border-success"
+                    : "border-light"
+                }`}
+              >
                 <div className="row g-0 h-100">
                   <div className="col-md-4 position-relative">
                     <img
                       src={video.thumbnail}
                       alt={video.title}
                       className="card-img h-100"
-                      style={{ 
-                        objectFit: 'cover',
-                        filter: isCompleted ? 'grayscale(30%)' : 'none',
-                        opacity: isCompleted ? 0.8 : 1
+                      style={{
+                        objectFit: "cover",
+                        filter: isCompleted ? "grayscale(30%)" : "none",
+                        opacity: isCompleted ? 0.8 : 1,
                       }}
                     />
-                    
+
                     {/* ✅ Completion Status Badge */}
                     <div className="position-absolute top-0 end-0 m-2">
                       <span className={`badge ${videoStatus.badgeClass}`}>
@@ -488,52 +515,74 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
                             video.title
                           )}
                         </h6>
-                        
+
                         {/* Progress Indicator for individual video */}
                         <div className="mb-2">
                           <div className="d-flex align-items-center">
                             <small className="text-muted me-2">Status:</small>
-                            <span className={`badge ${isCompleted ? 'bg-success' : 'bg-warning'}`}>
-                              {isCompleted ? 'Completed' : 'Pending'}
+                            <span
+                              className={`badge ${
+                                isCompleted ? "bg-success" : "bg-warning"
+                              }`}
+                            >
+                              {isCompleted ? "Completed" : "Pending"}
                             </span>
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="mt-auto">
                         <div className="d-flex justify-content-between align-items-center">
                           <div className="btn-group btn-group-sm">
                             <button
                               className={`btn ${
-                                isCompleted ? 'btn-outline-danger' : 'btn-outline-success'
+                                isCompleted
+                                  ? "btn-outline-danger"
+                                  : "btn-outline-success"
                               }`}
-                              onClick={() => 
-                                isCompleted ? markVideoIncomplete(video.id) : markVideoCompleted(video.id)
+                              onClick={() =>
+                                isCompleted
+                                  ? markVideoIncomplete(video.id)
+                                  : markVideoCompleted(video.id)
                               }
-                              title={isCompleted ? "Mark as incomplete" : "Mark as completed"}
+                              title={
+                                isCompleted
+                                  ? "Mark as incomplete"
+                                  : "Mark as completed"
+                              }
                             >
-                              <i className={`fas ${
-                                isCompleted ? 'fa-times-circle' : 'fa-check-circle'
-                              }`}></i>
-                              {isCompleted ? 'uncomplete' : ' Done'}
+                              <i
+                                className={`fas ${
+                                  isCompleted
+                                    ? "fa-times-circle"
+                                    : "fa-check-circle"
+                                }`}
+                              ></i>
+                              {isCompleted ? "uncomplete" : " Done"}
                             </button>
-                            
+
                             <a
                               href={`https://www.youtube.com/watch?v=${video.id}`}
                               target="_blank"
                               rel="noreferrer"
-                              className={`btn ${isCompleted ? 'btn-success' : 'btn-primary'}`}
+                              className={`btn ${
+                                isCompleted ? "btn-success" : "btn-primary"
+                              }`}
                               onClick={() => watchVideo(video.id)}
-                              title={isCompleted ? "Watch again" : "Watch video"}
+                              title={
+                                isCompleted ? "Watch again" : "Watch video"
+                              }
                             >
-                              <i className={`fas ${isCompleted ? 'fa-redo' : 'fa-play'}`}></i>
-                              {isCompleted ? ' Rewatch' : ' Watch'}
+                              <i
+                                className={`fas ${
+                                  isCompleted ? "fa-redo" : "fa-play"
+                                }`}
+                              ></i>
+                              {isCompleted ? " Rewatch" : " Watch"}
                             </a>
                           </div>
-                          
-                          <small className="text-muted">
-                            {video.duration}
-                          </small>
+
+                          <small className="text-muted">{video.duration}</small>
                         </div>
                       </div>
                     </div>
@@ -552,13 +601,17 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
             <div>
               <h6 className="mb-1">🎯 Learning Progress</h6>
               <p className="mb-0">
-                You've completed <strong>{completedVideos.length}</strong> out of <strong>{videos.length}</strong> videos 
-                ({progress}% of the course)
+                You've completed <strong>{completedVideos.length}</strong> out
+                of <strong>{videos.length}</strong> videos ({progress}% of the
+                course)
               </p>
             </div>
             <div className="text-end">
               <small className="text-muted">
-                Last watched: {lastWatched ? videos.find(v => v.id === lastWatched)?.title : 'Not started'}
+                Last watched:{" "}
+                {lastWatched
+                  ? videos.find((v) => v.id === lastWatched)?.title
+                  : "Not started"}
               </small>
             </div>
           </div>
@@ -576,8 +629,10 @@ const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
       {progress === 100 && (
         <div className="alert alert-success text-center mt-4">
           <h5>🎉 Course Completed!</h5>
-          <p className="mb-2">You've successfully completed all videos in this course.</p>
-          <button 
+          <p className="mb-2">
+            You've successfully completed all videos in this course.
+          </p>
+          <button
             className="btn btn-outline-success btn-sm"
             onClick={() => setShowCompletion(true)}
           >
