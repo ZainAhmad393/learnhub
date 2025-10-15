@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useAuth } from './../context/AuthContext';
 import { useNavigate } from 'react-router-dom'; // ✅ useNavigate import karna hai
 import { Link } from "react-router-dom";
+import config from '../config';
 const Login = () => {
   const navigate = useNavigate(); // 🌟 Hook initialize
   const { login } = useAuth(); 
@@ -17,6 +18,8 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const API_BASE_URL = config.API_BASE_URL;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,7 +49,7 @@ const Login = () => {
     setLoading(true);
     setErrors({});
     try {
-        const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+    const res = await axios.post(`${API_BASE_URL}/auth/login`, formData);
         
         // Backend successful, token receive hua, login context update karen
         login(res.data); 

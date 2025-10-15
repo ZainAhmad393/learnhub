@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
+import config from "../config"; // 👈 import config file
 
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = `${config.API_BASE_URL}/auth`; // ✅ auto works for dev + production
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -17,7 +18,6 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(!!token);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Load user details if token exists
   const loadUser = async () => {
     if (token) {
       try {
@@ -35,7 +35,6 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   };
 
-  // ✅ Login & save everything locally
   const login = (userData) => {
     localStorage.setItem("authToken", userData.token);
     localStorage.setItem(
@@ -56,7 +55,6 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(true);
   };
 
-  // ✅ Logout & clear localStorage
   const logout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("user");
@@ -65,7 +63,6 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
   };
 
-  // 🔁 Check token on app load or when token changes
   useEffect(() => {
     loadUser();
   }, [token]);

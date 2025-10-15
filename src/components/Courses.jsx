@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import config from '../config';
 import styles from "../stylesheet/CoursesPage.module.css";
 import {
   FaLaptopCode,
@@ -40,13 +41,13 @@ const CoursesPage = () => {
   const [showAllActive, setShowAllActive] = useState(false);
   const [showAllFeatured, setShowAllFeatured] = useState(false);
   const [showAllCategories, setShowAllCategories] = useState(false);
-
+    const API_BASE_URL = config.API_BASE_URL;
   // ✅ DEBUGGING: Fetch courses from backend
   const fetchCourses = async (filter) => {
     setIsLoading(true);
     try {
       console.log("🔄 Fetching courses from backend...");
-      const res = await axios.get("http://localhost:5000/api/courses");
+       const res = await axios.get(`${API_BASE_URL}/courses`);
       console.log("📦 Backend courses response:", res.data);
       
       let courses = Array.isArray(res.data) ? res.data : [];
@@ -77,7 +78,7 @@ const CoursesPage = () => {
       }
 
       console.log("🔄 Fetching enrollments for user:", user._id);
-      const res = await axios.get(`http://localhost:5000/api/enrollments/${user._id}`);
+       const res = await axios.get(`${API_BASE_URL}/enrollments/${user._id}`);
       console.log("📦 Enrollments response:", res.data);
       
       setEnrolledCourses(Array.isArray(res.data) ? res.data : []);
@@ -98,7 +99,7 @@ const CoursesPage = () => {
       }
 
       console.log("🎯 Enrolling in course:", course.title);
-      const res = await axios.post("http://localhost:5000/api/enrollments/enroll", {
+       const res = await axios.post(`${API_BASE_URL}/enrollments/enroll`, {
         userId: user._id,
         courseId: course._id,
       });

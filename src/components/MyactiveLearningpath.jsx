@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import config from '../config';
 import { useAuth } from "../context/AuthContext";
 
 const API_KEY = "AIzaSyCpzIPK4GPMH5G3XnV9yz2UWydcn6THgRs";
-const BACKEND_URL = "http://localhost:5000/api/enrollments";
 
 const MyLearningPath = ({ playlistId, course, onProgressUpdate }) => {
   const { user } = useAuth();
@@ -15,7 +15,8 @@ const MyLearningPath = ({ playlistId, course, onProgressUpdate }) => {
   const [errorMsg, setErrorMsg] = useState("");
   const [currentVideo, setCurrentVideo] = useState(null);
   const [showCompletion, setShowCompletion] = useState(false);
-
+  
+const BACKEND_URL = `${config.API_BASE_URL}/enrollments`;
   // ✅ Fetch YouTube Playlist
   useEffect(() => {
     const fetchVideos = async () => {
